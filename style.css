@@ -1,0 +1,194 @@
+:root {
+    --bg-color: #F4F4F5;
+    --text-main: #18181B;
+    --text-muted: #71717A;
+    --border-color: #E4E4E7;
+    --card-bg: #FFFFFF;
+    --primary: #09090B;
+    --primary-hover: #27272A;
+    --code-bg: #FAFAFA;
+    --radius: 8px;
+    --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+    background-color: var(--bg-color);
+    color: var(--text-main);
+    font-family: 'Inter', -apple-system, sans-serif;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    padding: 30px;
+    -webkit-font-smoothing: antialiased;
+}
+
+.app-container {
+    width: 100%;
+    max-width: 1400px;
+    height: 90vh;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Header */
+.header {
+    margin-bottom: 24px;
+}
+.header h1 {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: var(--text-main);
+}
+.header p {
+    color: var(--text-muted);
+    font-size: 0.9rem;
+    margin-top: 4px;
+}
+
+/* Layout */
+.main-content {
+    display: flex;
+    flex: 1;
+    gap: 24px;
+    height: calc(100% - 90px);
+}
+
+.card {
+    background-color: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow-sm);
+    overflow: hidden;
+}
+
+.panel {
+    flex: 1;
+    min-width: 0; /* Prevents flex flex-blowing-up */
+}
+
+.input-panel { width: 50%; }
+.output-panel { width: 50%; }
+
+.panel-header {
+    padding: 12px 16px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--text-main);
+    background-color: #FAFAFA;
+}
+
+/* Code Editor Textarea */
+.code-editor {
+    width: 100%;
+    padding: 16px;
+    border: none;
+    outline: none;
+    resize: none;
+    font-family: 'Fira Code', monospace;
+    font-size: 0.85rem;
+    line-height: 1.6;
+    color: var(--text-main);
+    background-color: var(--card-bg);
+}
+.code-editor::placeholder { color: #A1A1AA; }
+
+/* Result Box */
+.result-box {
+    padding: 16px;
+    overflow-y: auto;
+    background-color: var(--code-bg);
+}
+
+.result-box pre {
+    font-family: 'Fira Code', monospace;
+    font-size: 0.85rem;
+    line-height: 1.5;
+    color: #27272A;
+    white-space: pre-wrap;
+    word-break: break-all;
+}
+
+.result-image-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.result-image-wrapper img {
+    max-width: 100%;
+    border-radius: var(--radius);
+    border: 1px solid var(--border-color);
+}
+
+/* Base Components */
+.primary-btn {
+    padding: 10px 20px;
+    background-color: var(--primary);
+    color: white;
+    border: none;
+    border-radius: var(--radius);
+    font-size: 0.9rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background-color 0.15s;
+    display: inline-flex;
+    align-items: center;
+}
+.primary-btn:hover { background-color: var(--primary-hover); }
+
+/* Utilities */
+.flex-between { display: flex; justify-content: space-between; align-items: center; }
+.flex-1 { flex: 1; }
+.flex-col { display: flex; flex-direction: column; }
+.border-b { border-bottom: 1px solid var(--border-color); }
+.hidden { display: none !important; }
+.mr-2 { margin-right: 8px; }
+.w-100 { width: 100%; }
+.mt-2 { margin-top: 8px; }
+
+.visual-toolbar {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    align-items: center;
+    padding-top: 8px;
+    width: 100%;
+}
+.mini-input {
+    padding: 2px 8px;
+    font-size: 0.8rem;
+    height: 24px;
+    width: 140px;
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    outline: none;
+    background-color: var(--card-bg);
+}
+.tag { font-size: 0.75rem; color: var(--text-muted); background: #F4F4F5; padding: 2px 6px; border-radius: 4px; border: 1px solid var(--border-color); }
+.minimal-select {
+    padding: 2px 6px;
+    font-size: 0.8rem;
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    outline: none;
+    cursor: pointer;
+    background-color: var(--card-bg);
+}
+
+/* Loader */
+.loader {
+    width: 14px; height: 14px;
+    border: 2px solid var(--text-muted);
+    border-bottom-color: transparent;
+    border-radius: 50%;
+    animation: rotation 1s linear infinite;
+}
+@keyframes rotation { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+
+/* Responsive */
+@media (max-width: 900px) {
+    .main-content { flex-direction: column; }
+    .panel { width: 100%; height: 500px; }
+}

@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>cURL Executor</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="app-container">
+        <header class="header flex-between">
+            <div>
+                <h1>cURL Executor</h1>
+                <p>一键解析并触发 cURL 网络请求 (专为 API 调试设计)</p>
+            </div>
+            <button id="sendBtn" class="primary-btn">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-2"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
+                发送请求 (Execute)
+            </button>
+        </header>
+
+        <div class="main-content">
+            <!-- 左侧：cURL 粘贴区 -->
+            <div class="panel card flex-col input-panel">
+                <div class="panel-header border-b flex-col">
+                    <div class="flex-between w-100">
+                        <span>请求体 (Request Details)</span>
+                        <span class="tag">支持跨行复制</span>
+                    </div>
+                    <!-- 快捷可视化工具栏 -->
+                    <div class="visual-toolbar mt-2">
+                        <select id="uiEndpoint" class="minimal-select">
+                            <option value="https://pinova.ai/v1/chat/completions">https://pinova.ai/v1/chat/completions</option>
+                            <option value="https://pinova.ai/v1/images/generations">https://pinova.ai/v1/images/generations</option>
+                            <option value="https://csp.burncloud.com/v1/chat/completions">https://csp.burncloud.com/v1/chat/completions</option>
+                            <option value="https://csp.burncloud.com/v1/images/generations">https://csp.burncloud.com/v1/images/generations</option>
+                        </select>
+                        <input type="password" id="uiKey" class="minimal-input mini-input" placeholder="API Key (sk-...)">
+                        <input type="text" id="uiModel" class="minimal-input mini-input" style="width: 140px;" placeholder="填写模型 (gpt-4o)">
+                        <div style="margin-left: auto; display:flex; gap: 8px;">
+                            <select id="uiMode" class="minimal-select">
+                                <option value="chat">文本构造 (Text)</option>
+                                <option value="image">图像构造 (Image)</option>
+                            </select>
+                            <button id="presetGen" style="padding: 4px 12px; font-size: 0.8rem; background: var(--text-main); color: var(--card-bg); border: none; border-radius: 4px; cursor: pointer; white-space: nowrap; flex-shrink: 0;">载入框架</button>
+                        </div>
+                    </div>
+                </div>
+                <textarea id="curlInput" class="code-editor flex-1" placeholder="在此处粘贴完整 cURL 命令...
+
+示例:
+curl -X POST &quot;https://api.example.com/v1/chat/completions&quot; \
+  -H &quot;Authorization: Bearer sk-...&quot; \
+  -H &quot;Content-Type: application/json&quot; \
+  -d '{
+    &quot;model&quot;: &quot;gpt-4o&quot;,
+    &quot;messages&quot;: [{&quot;role&quot;: &quot;user&quot;, &quot;content&quot;: &quot;Hello&quot;}]
+  }'" spellcheck="false"></textarea>
+            </div>
+
+            <!-- 右侧：响应区 -->
+            <div class="panel card flex-col output-panel">
+                <div class="panel-header border-b flex-between">
+                    <span>响应包 (Response Payload)</span>
+                    <span id="loader" class="loader hidden"></span>
+                </div>
+                <!-- 预案容器：纯文本 JSON / 或图片 -->
+                <div class="result-box flex-1" id="resultContainer">
+                    <pre><code id="jsonOutput" class="language-json">等待系统发射信号...</code></pre>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="app.js"></script>
+</body>
+</html>
