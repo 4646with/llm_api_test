@@ -1,10 +1,10 @@
 services:
   llm-api-test:
-    image: llm-api-test:latest
     build:
       context: .
       dockerfile: Dockerfile
+    image: llm-api-test:latest
     container_name: llm-api-test
-    #ports:
-    #-"8080:80"
+    # ports:
+    #   - "8080:80"
     restart: unless-stopped
