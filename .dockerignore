@@ -1,5 +1,12 @@
-# 忽略不需要打包进镜像的文件和文件夹
-.git
-.agent
+# ── 版本控制与工具配置 ──
+.git/
+.agent/
+.claude/
+contexts/
+
+# ── 不需要打包进镜像的文件 ──
 Dockerfile
 .dockerignore
+docker-compose.yaml
+.gitignore
+README.md
